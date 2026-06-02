@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Molly Young | RevOps as Engineering</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #101114;
+      --panel-2: #15171c;
+      --ink: #f5f5f0;
+      --muted: #9ca3af;
+      --faint: #666d78;
+      --line: rgba(255,255,255,.11);
+      --line-strong: rgba(255,255,255,.22);
+      --green: #7CFFB2;
+      --amber: #ffcc66;
+      --blue: #8ab4ff;
+      --pink: #ff7ab6;
+      --radius: 24px;
+      --shadow: 0 26px 90px rgba(0,0,0,.58);
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 4%, rgba(124,255,178,.14), transparent 28%),
+        radial-gradient(circle at 80% 4%, rgba(138,180,255,.12), transparent 26%),
+        radial-gradient(circle at 60% 100%, rgba(255,122,182,.08), transparent 28%),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.45;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .wrap {
+      width: min(1220px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 34px 0 74px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .8rem;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 22px rgba(124,255,178,.8);
+    }
+
+    .hero,
+    .section,
+    .company-detail {
+      border: 1px solid var(--line);
+      background: rgba(16,17,20,.86);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      overflow: hidden;
+      margin-bottom: 22px;
+      background: linear-gradient(135deg, rgba(16,17,20,.96), rgba(5,5,5,.9));
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      min-height: 560px;
+    }
+
+    .hero-main {
+      padding: clamp(28px, 5vw, 60px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(124,255,178,.06);
+      font-family: var(--mono);
+      font-size: .78rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 6.4vw, 5.9rem);
+      line-height: .88;
+      letter-spacing: -.085em;
+      max-width: 980px;
+    }
+
+    .early-line {
+      margin: 18px 0 0;
+      max-width: 860px;
+      color: var(--green);
+      font-size: clamp(1.02rem, 1.55vw, 1.22rem);
+      font-weight: 850;
+      letter-spacing: -.025em;
+    }
+
+    .lead {
+      margin: 18px 0 0;
+      max-width: 870px;
+      font-size: clamp(1.13rem, 2vw, 1.48rem);
+      color: rgba(245,245,240,.9);
+    }
+
+    .lead strong { color: var(--green); }
+
+    .sublead {
+      margin: 14px 0 0;
+      max-width: 840px;
+      color: var(--muted);
+    }
+
+    .triad {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .triad-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 15px;
+      background: rgba(255,255,255,.035);
+      min-height: 128px;
+    }
+
+    .triad-card strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-size: 1.02rem;
+    }
+
+    .triad-card span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .side {
+      border-left: 1px solid var(--line);
+      background: #08090b;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .terminal {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #050505;
+    }
+
+    .terminal {
+      max-width: 100%;
+    }
+
+    .term-head {
+      height: 38px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 13px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: .72rem;
+    }
+
+    .traffic {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.25);
+    }
+
+    .artifact-label {
+      padding: 14px 16px 0;
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: .78rem;
+    }
+
+    .code-block {
+      margin: 0;
+      padding: 16px;
+      overflow: auto;
+      font-family: var(--mono);
+      font-size: .74rem;
+      line-height: 1.45;
+      color: rgba(245,245,240,.88);
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .mini-bio {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 15px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mini-bio strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .mini-bio span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .section {
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.65rem, 3vw, 2.45rem);
+      line-height: .95;
+      letter-spacing: -.06em;
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .proof {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      min-height: 178px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      right: -42px;
+      top: -42px;
+      border-radius: 50%;
+      background: rgba(124,255,178,.12);
+    }
+
+    .num {
+      font-size: clamp(1.9rem, 4vw, 3.3rem);
+      font-weight: 950;
+      letter-spacing: -.08em;
+      color: var(--green);
+      line-height: .9;
+      margin-bottom: 10px;
+    }
+
+    .proof strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .proof span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .operating-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .op-node {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,.035);
+      min-height: 160px;
+      position: relative;
+    }
+
+    .op-node:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--green);
+      font-family: var(--mono);
+      font-weight: 900;
+      z-index: 2;
+    }
+
+    .op-node .idx {
+      font-family: var(--mono);
+      color: var(--green);
+      font-size: .78rem;
+      margin-bottom: 15px;
+    }
+
+    .op-node strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .op-node span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .company-layout {
+      display: grid;
+      grid-template-columns: 365px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .company-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .company-button {
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 15px;
+      background: rgba(255,255,255,.035);
+      color: var(--ink);
+      transition: 150ms ease;
+    }
+
+    .company-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+      background: rgba(255,255,255,.055);
+    }
+
+    .company-button.active {
+      border-color: var(--green);
+      background: rgba(124,255,178,.07);
+      box-shadow: 0 0 0 1px rgba(124,255,178,.16);
+    }
+
+    .company-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+    }
+
+    .company-name {
+      font-size: 1.08rem;
+      font-weight: 950;
+      letter-spacing: -.03em;
+    }
+
+    .years {
+      margin-top: 3px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: .78rem;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: .72rem;
+      color: var(--green);
+      background: rgba(124,255,178,.06);
+      white-space: nowrap;
+      font-weight: 900;
+    }
+
+    .company-detail {
+      padding: 24px;
+      min-height: 690px;
+      position: sticky;
+      top: 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+    }
+
+    .detail-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+
+    .company-detail h3 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: .9;
+      letter-spacing: -.08em;
+    }
+
+    .role {
+      margin-top: 9px;
+      color: var(--muted);
+    }
+
+    .stage {
+      margin-top: 8px;
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: .84rem;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.04);
+      padding: 8px 11px;
+      font-weight: 850;
+      font-size: .84rem;
+      transition: 150ms ease;
+    }
+
+    .tab:hover {
+      color: var(--ink);
+      border-color: var(--line-strong);
+    }
+
+    .tab.active {
+      color: #031006;
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .detail-summary {
+      border: 1px solid rgba(124,255,178,.2);
+      background: rgba(124,255,178,.05);
+      border-radius: 16px;
+      padding: 13px;
+      margin-bottom: 14px;
+      color: rgba(245,245,240,.9);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .detail-card {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.16);
+      border-radius: 16px;
+      padding: 13px;
+    }
+
+    .detail-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .detail-card span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 11px;
+      background: rgba(0,0,0,.16);
+      color: rgba(245,245,240,.86);
+      font-size: .92rem;
+    }
+
+    .section-label {
+      color: var(--green);
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .74rem;
+      margin-bottom: 10px;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stack-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.035);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .stack-card strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink);
+    }
+
+    .stack-card span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 1150px) {
+      .proof-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .operating-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .op-node::after {
+        display: none;
+      }
+
+      .triad {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .hero-grid,
+      .company-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .side {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .company-detail {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .proof-grid,
+      .operating-grid,
+      .detail-grid,
+      .stack-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 22px, 1180px); }
+      .hero-main, .side, .section, .company-detail { padding: 18px; }
+      .hero { border-radius: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="status"><span class="dot"></span><span>molly-young / revops-as-engineering</span></div>
+      <div>RevOps as Engineering · GTM Operating Systems · AI-enabled workflows</div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div>
+            <div class="eyebrow">~/revops-as-engineering</div>
+            <h1>I build GTM operating systems for companies in motion.</h1>
+            <p class="early-line">Early ops hire, again and again: I join before the playbook exists and build the GTM operating system from scratch.</p>
+            <p class="lead">
+              I came up wanting to build. My work connects <strong>systems, data, automation, revenue process, people, and vendors</strong> into the operating infrastructure a GTM org runs on.
+            </p>
+            <p class="sublead">
+              This is not a tools map. It is a map of the environments I have operated in, the layers I have built, and the leverage created across barely-out-of-stealth, early GTM, scale-up, hypergrowth, and IPO-stage companies.
+            </p>
+          </div>
+
+          <div class="triad">
+            <div class="triad-card">
+              <strong>Systems builder</strong>
+              <span>Architecture, automation, lifecycle controls, data pipelines, routing, enrichment, quote-to-cash, and source-of-truth reporting.</span>
+            </div>
+            <div class="triad-card">
+              <strong>Revenue operator</strong>
+              <span>Forecasting, deal desk, ROE, pipeline hygiene, territory and coverage planning, executive cadence, and cross-functional governance.</span>
+            </div>
+            <div class="triad-card">
+              <strong>People and leverage leader</strong>
+              <span>BDRs, SDRs, consultants, vendors, enablement, documentation, operating cadence, and AI-assisted work patterns.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side">
+          <div class="terminal">
+            <div class="term-head">
+              <span class="traffic"></span><span class="traffic"></span><span class="traffic"></span>
+              <span style="margin-left:8px;">event_import/config/example.yaml</span>
+            </div>
+            <div class="artifact-label">what it actually looks like</div>
+            <pre class="code-block"><code># event_import/config/example.yaml
+# one file per event -&gt; full pipeline runs from it
+event_name: &quot;Industry Tradeshow 2026&quot;
+source_csv: &quot;lists/tradeshow_raw.csv&quot;
+campaign_id: &quot;701XXXXXXXXXXXX&quot;
+
+columns:
+  email:   &quot;Email&quot;
+  company: &quot;Company&quot;
+  title:   &quot;Job Title&quot;
+
+pipeline:
+  - cleanup          # normalize, drop junk rows
+  - enrich           # backfill missing firmographics
+  - sf_match         # email match -&gt; leads + contacts; fuzzy account match
+  - exclusions       # dedupe vs existing records
+  - create_accounts  # net-new, territory-aware
+  - create_contacts  # owner = routed rep
+  - campaign_members # attach to campaign</code></pre>
+          </div>
+
+          <div class="mini-bio">
+            <strong>Molly Young</strong>
+            <span>Revenue Operations & GTM Engineering Leader · Saint Paul, MN</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Proof points</h2>
+          <p>The measurable proof is intentionally upfront. The company interaction below explains where those results came from.</p>
+        </div>
+      </div>
+
+      <div class="proof-grid">
+        <div class="proof">
+          <div class="num">6x</div>
+          <strong>Speed-to-lead improvement</strong>
+          <span>Contact processing, routing automation, SLAs, alerts, and rep visibility.</span>
+        </div>
+        <div class="proof">
+          <div class="num">50%</div>
+          <strong>Quote approval reduction</strong>
+          <span>Pricing, product structure, approval workflows, CRM configuration, and templates.</span>
+        </div>
+        <div class="proof">
+          <div class="num">70%</div>
+          <strong>Less rep data entry</strong>
+          <span>AI-enhanced MEDDPICC workflows using call, meeting, and email intelligence.</span>
+        </div>
+        <div class="proof">
+          <div class="num">60+</div>
+          <strong>Closed-won validation checks</strong>
+          <span>Automated deal desk review agent surfacing exceptions and stamping approvals.</span>
+        </div>
+        <div class="proof">
+          <div class="num">$1M+</div>
+          <strong>Qualified pipeline per quarter</strong>
+          <span>Generated as an early GitLab BDR before moving into team leadership and GTM process building.</span>
+        </div>
+        <div class="proof">
+          <div class="num">0 to 1</div>
+          <strong>Teams and motions built</strong>
+          <span>Early GTM motions, BDR teams, onboarding, vendor strategy, and operating cadences.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>The operating pattern</h2>
+          <p>This is the recurring shape of the work across companies. Not a tool list. Not a dashboard gallery. A GTM operating system.</p>
+        </div>
+      </div>
+
+      <div class="operating-grid">
+        <div class="op-node">
+          <div class="idx">01 / capture</div>
+          <strong>Signals and inputs</strong>
+          <span>Events, website activity, enrichment, product usage, inbound, outbound, and rep feedback.</span>
+        </div>
+        <div class="op-node">
+          <div class="idx">02 / normalize</div>
+          <strong>Data model</strong>
+          <span>Matching, dedupe, lifecycle, source logic, ownership, consent, and integrity controls.</span>
+        </div>
+        <div class="op-node">
+          <div class="idx">03 / orchestrate</div>
+          <strong>Workflow</strong>
+          <span>Routing, ROE, SLAs, assignments, approvals, alerts, and automation.</span>
+        </div>
+        <div class="op-node">
+          <div class="idx">04 / govern</div>
+          <strong>Revenue process</strong>
+          <span>Forecasting, deal desk, quote-to-cash, pipeline hygiene, and operating cadences.</span>
+        </div>
+        <div class="op-node">
+          <div class="idx">05 / scale</div>
+          <strong>Leverage</strong>
+          <span>People, vendors, enablement, documentation, analytics, and AI-assisted workflows.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Company-stage operating map</h2>
+          <p>Click a company, then switch between Story, Built, Leverage, and Proof. This keeps the interaction focused on what changed, not which tools were present.</p>
+        </div>
+      </div>
+
+      <div class="company-layout">
+        <div class="company-list" id="companyList"></div>
+        <article class="company-detail" id="companyDetail"></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Selected stack</h2>
+          <p>Listed once, globally. The company panels stay focused on the operating story instead of inaccurate or repetitive per-company tool rows.</p>
+        </div>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-card">
+          <strong>CRM, MAP, and engagement</strong>
+          <span>Salesforce, HubSpot, Marketo, Eloqua, Outreach, Gong, Clari</span>
+        </div>
+        <div class="stack-card">
+          <strong>Routing, QTC, and revenue systems</strong>
+          <span>LeanData, Chili Piper, DealHub, PandaDoc, Workato, NetSuite</span>
+        </div>
+        <div class="stack-card">
+          <strong>Signals, enrichment, and GTM data</strong>
+          <span>ZoomInfo, Floqer, Warmly, Propensity, 6sense, Common Room, Apollo</span>
+        </div>
+        <div class="stack-card">
+          <strong>Technical and analytics</strong>
+          <span>Python, Bash, SQL, SOQL, YAML, JSON, REST APIs, Salesforce CLI, Claude Code, Tableau, Looker</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const companies = [
+      {
+        name: "Lumana",
+        years: "2026-Present",
+        role: "Senior Manager, Revenue Operations",
+        stage: "Barely out of stealth / early GTM",
+        badge: "Early GTM",
+        story: "Building the GTM operating foundation across top-of-funnel architecture, systems, signal-based outbound, forecasting, analytics, deal desk, and quote-to-cash in a barely-out-of-stealth environment.",
+        built: [
+          "Automated closed-won deal desk approval agent",
+          "Signal-based outbound infrastructure",
+          "Config-driven Python event import pipeline",
+          "Salesforce-to-Tableau Cloud reporting layer",
+          "Forecast hygiene and pipeline insight digests",
+          "Salesforce-to-NetSuite quote-to-cash integration"
+        ],
+        leverage: [
+          "Stood up Slack-to-Jira intake, sprint planning, and prioritization workflows.",
+          "Own and connect a 20+ platform GTM stack across revenue workflows.",
+          "Partner across Sales, SDR, Finance, Legal, and executive stakeholders."
+        ],
+        proof: [
+          "60+ check compliance matrix for closed-won review.",
+          "Buying signals routed into rep-facing workflows.",
+          "Fragmented extracts replaced with self-serve reporting."
+        ]
+      },
+      {
+        name: "Buildkite",
+        years: "2023-2026",
+        role: "Manager, Revenue Operations / Revenue Operations + BDR Manager",
+        stage: "Scale-up / first RevOps hire",
+        badge: "Scale-up",
+        story: "First RevOps hire supporting Sales, Marketing, BDR, Partnerships, Technical Services, and Finance; reporting to the CRO.",
+        built: [
+          "Lead-to-opportunity operating framework",
+          "Quote-to-cash transformation",
+          "AI-enhanced MEDDPICC workflows",
+          "Revenue source-of-truth model",
+          "HubSpot-to-Salesforce migration",
+          "GTM systems strategy and vendor management"
+        ],
+        leverage: [
+          "Managed BDRs and fractional GTM operations consultants.",
+          "Served as strategic partner across Sales, Marketing, Finance, and Legal.",
+          "Supported QBRs, forecasting, board reporting, demand modeling, territory planning, and compensation planning."
+        ],
+        proof: [
+          "6x improvement in speed to lead.",
+          "50% reduction in quote approval time.",
+          "70% reduction in rep data entry."
+        ]
+      },
+      {
+        name: "Remote",
+        years: "2021-2023",
+        role: "Growth Systems & Operations / Sales Business Partner / Senior Sales Development Operations Manager",
+        stage: "Hypergrowth / second Sales Ops hire",
+        badge: "Early Ops + Hypergrowth",
+        story: "Second Sales Ops hire supporting Sales, BDR, Marketing, Finance, Product, and Partnerships during rapid global GTM expansion.",
+        built: [
+          "Global GTM processes and rules of engagement",
+          "CRM-based lead processing, routing, SLAs, handoffs, and rep workflows",
+          "Regional data and email consent compliance workflows",
+          "Real-time website intent signal workflows",
+          "Market sizing, coverage planning, and GTM analytics models"
+        ],
+        leverage: [
+          "Supported global SDR and AE growth across segmented, regional, and product-aligned teams.",
+          "Mentored SDR and operations team members into expanded Sales Ops and GTM roles.",
+          "Partnered across Sales, BDR, Marketing, Finance, Product, and Partnerships."
+        ],
+        proof: [
+          "Supported SDR and AE team expansion of over 200% in a three-month period.",
+          "Operationalized website intent signals for faster and more relevant follow-up.",
+          "Supported analytics across territory design, demand modeling, quotas, and compensation planning."
+        ]
+      },
+      {
+        name: "Fastly",
+        years: "2019-2021",
+        role: "Marketing Operations Manager",
+        stage: "Early-to-scale-up through IPO",
+        badge: "Early to IPO",
+        story: "Second Marketing Ops hire helping scale GTM operations through rapid growth, multiple acquisitions, and IPO-stage operating complexity.",
+        built: [
+          "Multi-source enrichment waterfall automation",
+          "Global lead management ecosystem",
+          "Email deliverability remediation workflows",
+          "Eloqua-to-Marketo and HubSpot-to-Marketo/Salesforce migrations",
+          "Operational intake, project management, and capacity planning"
+        ],
+        leverage: [
+          "Supported expansion across marketing operations, analytics, program management, demand, and enablement.",
+          "Built intake, project management, and capacity planning processes for a growing marketing org.",
+          "Supported global teams and acquisition integration work."
+        ],
+        proof: [
+          "Improved data quality and territory planning inputs.",
+          "Restored sending reputation from blacklist status.",
+          "Supported team growth from early marketing ops into a larger operating function."
+        ]
+      },
+      {
+        name: "Mattermost",
+        years: "2018-2019",
+        role: "Marketing Operations Manager",
+        stage: "Early marketing and GTM ops",
+        badge: "Early Ops",
+        story: "Second Marketing hire reporting to the VP of Marketing, building early operational process around marketing automation and SDR support.",
+        built: [
+          "Marketing automation and process foundations",
+          "Attribution modeling",
+          "Routing improvements and SLAs",
+          "SDR onboarding and early GTM operations"
+        ],
+        leverage: [
+          "Partnered directly with VP Marketing and Sales leadership.",
+          "Built early SDR onboarding and operational process.",
+          "Supported pipeline generation through early GTM process design."
+        ],
+        proof: [
+          "Created early GTM operating structure for sales and marketing handoffs."
+        ]
+      },
+      {
+        name: "GitLab",
+        years: "2016-2018",
+        role: "BDR Manager / BDR Team Lead / BDR",
+        stage: "Early GTM / foundational processes",
+        badge: "Early GTM",
+        story: "Early employee contributing to foundational GTM processes while moving from individual contributor into team leadership.",
+        built: [
+          "Global remote BDR / SDR team processes",
+          "Onboarding and enablement programs",
+          "CRM-based SMB sales motion, handoffs, SLAs, and documentation",
+          "Early channel and reseller playbooks"
+        ],
+        leverage: [
+          "Built and managed a global remote BDR and SDR team.",
+          "Created onboarding and enablement programs for faster ramp.",
+          "Helped establish reseller onboarding and channel playbooks."
+        ],
+        proof: [
+          "$1M+ qualified pipeline per quarter as an early BDR hire.",
+          "30% decrease in ramp time through onboarding and enablement programs."
+        ]
+      }
+    ];
+
+    const companyList = document.getElementById("companyList");
+    const companyDetail = document.getElementById("companyDetail");
+
+    let selectedCompany = 0;
+    let selectedTab = "story";
+
+    function renderCompanyList() {
+      companyList.innerHTML = "";
+      companies.forEach((company, index) => {
+        const button = document.createElement("button");
+        button.className = "company-button" + (index === selectedCompany ? " active" : "");
+        button.innerHTML = `
+          <div class="company-row">
+            <div>
+              <div class="company-name">${company.name}</div>
+              <div class="years">${company.years} · ${company.stage}</div>
+            </div>
+            <div class="pill">${company.badge}</div>
+          </div>
+        `;
+        button.addEventListener("click", () => {
+          selectedCompany = index;
+          selectedTab = "story";
+          render();
+        });
+        companyList.appendChild(button);
+      });
+    }
+
+    function renderTabContent(company) {
+      if (selectedTab === "story") {
+        return `
+          <div class="section-label">Story</div>
+          <div class="detail-summary">${company.story}</div>
+          <div class="detail-grid">
+            <div class="detail-card"><strong>Stage</strong><span>${company.stage}</span></div>
+            <div class="detail-card"><strong>Role</strong><span>${company.role}</span></div>
+            <div class="detail-card"><strong>Pattern</strong><span>Joined in an immature or changing GTM environment, then built the operating layer needed for the next stage.</span></div>
+            <div class="detail-card"><strong>Operating thesis</strong><span>Make the work repeatable, visible, governable, and scalable beyond one person.</span></div>
+          </div>
+        `;
+      }
+
+      if (selectedTab === "built") {
+        return `
+          <div class="section-label">What I built</div>
+          <ul class="list">
+            ${company.built.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        `;
+      }
+
+      if (selectedTab === "leverage") {
+        return `
+          <div class="section-label">Leadership and leverage</div>
+          <ul class="list">
+            ${company.leverage.map(item => `<li>${item}</li>`).join("")}
+          </ul>
+        `;
+      }
+
+      return `
+        <div class="section-label">Proof and outcomes</div>
+        <ul class="list">
+          ${company.proof.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+      `;
+    }
+
+    function renderDetail() {
+      const company = companies[selectedCompany];
+      companyDetail.innerHTML = `
+        <div class="detail-top">
+          <div>
+            <h3>${company.name}</h3>
+            <div class="role">${company.role}</div>
+            <div class="stage">${company.years} · ${company.stage}</div>
+          </div>
+          <div class="pill">${company.badge}</div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab ${selectedTab === "story" ? "active" : ""}" data-tab="story">Story</button>
+          <button class="tab ${selectedTab === "built" ? "active" : ""}" data-tab="built">Built</button>
+          <button class="tab ${selectedTab === "leverage" ? "active" : ""}" data-tab="leverage">Leverage</button>
+          <button class="tab ${selectedTab === "proof" ? "active" : ""}" data-tab="proof">Proof</button>
+        </div>
+
+        <div id="tabContent">
+          ${renderTabContent(company)}
+        </div>
+      `;
+
+      companyDetail.querySelectorAll(".tab").forEach(tab => {
+        tab.addEventListener("click", () => {
+          selectedTab = tab.dataset.tab;
+          renderDetail();
+        });
+      });
+    }
+
+    function render() {
+      renderCompanyList();
+      renderDetail();
+    }
+
+    render();
+  </script>
+</body>
+</html>
