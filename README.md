@@ -1,6 +1,6 @@
 # Molly Young - RevOps as Engineering
 
-> I build the GTM operating systems revenue teams run on.
+I build the GTM operating systems revenue teams run on.
 
 **Live site:** https://molleyoung.github.io/whoami/
 **Résumé (PDF):** https://molleyoung.github.io/whoami/whoami.pdf
