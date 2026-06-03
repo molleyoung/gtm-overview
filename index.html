@@ -99,8 +99,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      min-height: 560px;
+      grid-template-columns: 1fr;
     }
 
     .hero-main {
@@ -123,6 +122,12 @@
       font-size: .78rem;
       margin-bottom: 22px;
     }
+
+    .identity { margin-bottom: 24px; }
+    .identity .name { display: block; font-size: 1.55rem; font-weight: 900; letter-spacing: -.02em; }
+    .identity .title { display: block; margin-top: 5px; color: var(--green); font-family: var(--mono); font-size: .86rem; }
+    .identity .contact { display: block; margin-top: 7px; color: var(--muted); font-family: var(--mono); font-size: .8rem; }
+    .identity .contact a { color: var(--muted); text-decoration: none; }
 
     h1 {
       margin: 0;
@@ -203,13 +208,12 @@
     }
 
     .side {
-      border-left: 1px solid var(--line);
+      border-top: 1px solid var(--line);
       background: #08090b;
-      padding: 20px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
+      gap: 16px;
     }
 
     .terminal {
@@ -359,6 +363,19 @@
     .proof span {
       color: var(--muted);
       font-size: .9rem;
+    }
+
+    .proof-split {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     .operating-grid {
@@ -685,7 +702,11 @@
       <div class="hero-grid">
         <div class="hero-main">
           <div>
-            <div class="eyebrow">~/revops-as-engineering</div>
+            <div class="identity">
+              <span class="name">Molly Young</span>
+              <span class="title">Revenue Operations &amp; GTM Engineering Leader · Saint Paul, MN</span>
+              <span class="contact">mollyeyoung@gmail.com &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/molleyoung/">linkedin.com/in/molleyoung</a></span>
+            </div>
             <h1>I build GTM operating systems for companies in motion.</h1>
             <p class="early-line">Early ops hire, again and again: I join before the playbook exists and build the GTM operating system from scratch.</p>
             <p class="lead">
@@ -694,7 +715,7 @@
             <p class="sublead">
               This is not a tools map. It is a map of the environments I have operated in, the layers I have built, and the leverage created across barely-out-of-stealth, early GTM, scale-up, hypergrowth, and IPO-stage companies.
             </p>
-            <a class="cta" href="whoami.pdf">$ download resume &nbsp;&rarr;</a>
+            <a class="cta" href="whoami.pdf" target="_blank" rel="noopener">$ download resume &nbsp;&rarr;</a>
           </div>
 
           <div class="triad">
@@ -713,14 +734,25 @@
           </div>
         </div>
 
-        <aside class="side">
-          <div class="terminal">
-            <div class="term-head">
-              <span class="traffic"></span><span class="traffic"></span><span class="traffic"></span>
-              <span style="margin-left:8px;">event_import/config/example.yaml</span>
-            </div>
-            <div class="artifact-label">what it actually looks like</div>
-            <pre class="code-block"><code># event_import/config/example.yaml
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>What I build, and what it returns</h2>
+          <p>Left: a real config from an event-import pipeline I built in Python. One file per tradeshow or webinar drives the whole run - enrichment, fuzzy account matching, dedupe, and territory-aware routing into Salesforce. Right: the kind of results these systems return.</p>
+        </div>
+      </div>
+
+      <div class="proof-split">
+        <div class="terminal">
+          <div class="term-head">
+            <span class="traffic"></span><span class="traffic"></span><span class="traffic"></span>
+            <span style="margin-left:8px;">event_import/config/example.yaml</span>
+          </div>
+          <div class="artifact-label">what it actually looks like</div>
+          <pre class="code-block"><code># event_import/config/example.yaml
 # one file per event -&gt; full pipeline runs from it
 event_name: &quot;Industry Tradeshow 2026&quot;
 source_csv: &quot;lists/tradeshow_raw.csv&quot;
@@ -739,54 +771,29 @@ pipeline:
   - create_accounts  # net-new, territory-aware
   - create_contacts  # owner = routed rep
   - campaign_members # attach to campaign</code></pre>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="proof">
+            <div class="num">6x</div>
+            <strong>Speed-to-lead</strong>
+            <span>Contact processing, routing automation, SLAs, alerts, rep visibility.</span>
           </div>
-
-          <div class="mini-bio">
-            <strong>Molly Young</strong>
-            <span>Revenue Operations &amp; GTM Engineering Leader · Saint Paul, MN</span>
+          <div class="proof">
+            <div class="num">50%</div>
+            <strong>Faster quote approvals</strong>
+            <span>Pricing, product structure, approval workflows, CRM config, templates.</span>
           </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head">
-        <div>
-          <h2>Proof points</h2>
-          <p>The measurable proof is intentionally upfront. The company interaction below explains where those results came from.</p>
-        </div>
-      </div>
-
-      <div class="proof-grid">
-        <div class="proof">
-          <div class="num">6x</div>
-          <strong>Speed-to-lead improvement</strong>
-          <span>Contact processing, routing automation, SLAs, alerts, and rep visibility.</span>
-        </div>
-        <div class="proof">
-          <div class="num">50%</div>
-          <strong>Quote approval reduction</strong>
-          <span>Pricing, product structure, approval workflows, CRM configuration, and templates.</span>
-        </div>
-        <div class="proof">
-          <div class="num">70%</div>
-          <strong>Less rep data entry</strong>
-          <span>AI-enhanced MEDDPICC workflows using call, meeting, and email intelligence.</span>
-        </div>
-        <div class="proof">
-          <div class="num">60+</div>
-          <strong>Closed-won validation checks</strong>
-          <span>Automated deal desk review agent surfacing exceptions and stamping approvals.</span>
-        </div>
-        <div class="proof">
-          <div class="num">$1M+</div>
-          <strong>Qualified pipeline per quarter</strong>
-          <span>Generated as an early GitLab BDR before moving into team leadership and GTM process building.</span>
-        </div>
-        <div class="proof">
-          <div class="num">0 to 1</div>
-          <strong>Teams and motions built</strong>
-          <span>Early GTM motions, BDR teams, onboarding, vendor strategy, and operating cadences.</span>
+          <div class="proof">
+            <div class="num">70%</div>
+            <strong>Less rep data entry</strong>
+            <span>AI-enhanced MEDDPICC from call, meeting, and email intelligence.</span>
+          </div>
+          <div class="proof">
+            <div class="num">60+</div>
+            <strong>Closed-won checks</strong>
+            <span>Automated deal desk agent surfacing exceptions, stamping approvals.</span>
+          </div>
         </div>
       </div>
     </section>
