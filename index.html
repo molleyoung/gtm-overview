@@ -125,8 +125,8 @@
 
     .identity { margin-bottom: 24px; }
     .identity .name { display: block; font-size: 1.55rem; font-weight: 900; letter-spacing: -.02em; }
-    .identity .title { display: block; margin-top: 5px; color: var(--green); font-family: var(--mono); font-size: .86rem; }
-    .identity .contact { display: block; margin-top: 7px; color: var(--muted); font-family: var(--mono); font-size: .8rem; }
+    .identity .title { display: block; margin-top: 6px; color: var(--green); font-family: var(--mono); font-size: .8rem; }
+    .identity .contact { display: block; margin-top: 5px; color: var(--muted); font-family: var(--mono); font-size: .8rem; }
     .identity .contact a { color: var(--muted); text-decoration: none; }
 
     h1 {
@@ -139,18 +139,18 @@
 
     .early-line {
       margin: 18px 0 0;
-      max-width: 860px;
+      max-width: 960px;
       color: var(--green);
-      font-size: clamp(1.02rem, 1.55vw, 1.22rem);
-      font-weight: 850;
-      letter-spacing: -.025em;
+      font-size: clamp(1.02rem, 1.4vw, 1.16rem);
+      font-weight: 700;
+      letter-spacing: -.01em;
     }
 
     .lead {
-      margin: 18px 0 0;
-      max-width: 870px;
-      font-size: clamp(1.13rem, 2vw, 1.48rem);
-      color: rgba(245,245,240,.9);
+      margin: 16px 0 0;
+      max-width: 960px;
+      font-size: clamp(1.02rem, 1.4vw, 1.16rem);
+      color: rgba(245,245,240,.82);
     }
 
     .lead strong { color: var(--green); }
@@ -308,10 +308,15 @@
 
     h2 {
       margin: 0;
-      font-size: clamp(1.65rem, 3vw, 2.45rem);
-      line-height: .95;
-      letter-spacing: -.06em;
+      font-family: var(--mono);
+      font-size: clamp(1.25rem, 2.1vw, 1.65rem);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--green);
+      text-transform: lowercase;
     }
+
+    h2::before { content: "# "; color: var(--faint); }
 
     .section-head p {
       margin: 8px 0 0;
@@ -327,23 +332,10 @@
 
     .proof {
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 12px;
       padding: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
-      min-height: 178px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .proof::after {
-      content: "";
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      right: -42px;
-      top: -42px;
-      border-radius: 50%;
-      background: rgba(124,255,178,.12);
+      background: rgba(0,0,0,.22);
+      min-height: 148px;
     }
 
     .num {
@@ -358,17 +350,21 @@
     .proof strong {
       display: block;
       margin-bottom: 7px;
+      font-family: var(--mono);
+      font-size: .9rem;
     }
+
+    .proof strong::before { content: "> "; color: var(--green); }
 
     .proof span {
       color: var(--muted);
-      font-size: .9rem;
+      font-size: .88rem;
     }
 
     .proof-split {
       display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
       align-items: start;
     }
 
@@ -376,6 +372,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+    }
+
+    .artifact-desc {
+      margin: 0 0 12px;
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: .8rem;
+      line-height: 1.55;
     }
 
     .operating-grid {
@@ -431,7 +435,7 @@
 
     .company-list {
       display: grid;
-      gap: 10px;
+      gap: 14px;
     }
 
     .company-button {
@@ -440,7 +444,7 @@
       cursor: pointer;
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 15px;
+      padding: 21px 18px;
       background: rgba(255,255,255,.035);
       color: var(--ink);
       transition: 150ms ease;
@@ -712,9 +716,6 @@
             <p class="lead">
               I came up wanting to build. My work connects <strong>systems, data, automation, revenue process, people, and vendors</strong> into the operating infrastructure a GTM org runs on.
             </p>
-            <p class="sublead">
-              This is not a tools map. It is a map of the environments I have operated in, the layers I have built, and the leverage created across barely-out-of-stealth, early GTM, scale-up, hypergrowth, and IPO-stage companies.
-            </p>
             <a class="cta" href="whoami.pdf" target="_blank" rel="noopener">$ download resume &nbsp;&rarr;</a>
           </div>
 
@@ -741,12 +742,12 @@
       <div class="section-head">
         <div>
           <h2>What I build, and what it returns</h2>
-          <p>Left: a real config from an event-import pipeline I built in Python. One file per tradeshow or webinar drives the whole run - enrichment, fuzzy account matching, dedupe, and territory-aware routing into Salesforce. Right: the kind of results these systems return.</p>
         </div>
       </div>
 
       <div class="proof-split">
-        <div class="terminal">
+        <div class="artifact-col">
+          <div class="terminal">
           <div class="term-head">
             <span class="traffic"></span><span class="traffic"></span><span class="traffic"></span>
             <span style="margin-left:8px;">event_import/config/example.yaml</span>
@@ -771,6 +772,7 @@ pipeline:
   - create_accounts  # net-new, territory-aware
   - create_contacts  # owner = routed rep
   - campaign_members # attach to campaign</code></pre>
+          </div>
         </div>
 
         <div class="kpi-grid">
@@ -802,7 +804,6 @@ pipeline:
       <div class="section-head">
         <div>
           <h2>The operating pattern</h2>
-          <p>This is the recurring shape of the work across companies. Not a tool list. Not a dashboard gallery. A GTM operating system.</p>
         </div>
       </div>
 
@@ -853,7 +854,6 @@ pipeline:
       <div class="section-head">
         <div>
           <h2>Selected stack</h2>
-          <p>Organized like a system: the build layer up top, the GTM platforms it runs underneath.</p>
         </div>
       </div>
 
