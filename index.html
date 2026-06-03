@@ -156,6 +156,26 @@
       color: var(--muted);
     }
 
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 22px;
+      padding: 13px 20px;
+      background: var(--green);
+      color: #031006;
+      font-family: var(--mono);
+      font-weight: 800;
+      font-size: .92rem;
+      border-radius: 12px;
+      text-decoration: none;
+      width: fit-content;
+      box-shadow: 0 0 30px rgba(124,255,178,.28);
+      transition: 150ms ease;
+    }
+
+    .cta:hover { transform: translateY(-1px); box-shadow: 0 0 40px rgba(124,255,178,.4); }
+
     .triad {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -197,9 +217,6 @@
       border-radius: 18px;
       overflow: hidden;
       background: #050505;
-    }
-
-    .terminal {
       max-width: 100%;
     }
 
@@ -257,6 +274,18 @@
     .mini-bio span {
       color: var(--muted);
       font-size: .9rem;
+    }
+
+    .mini-bio a {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: .82rem;
+      text-decoration: none;
+      border: 1px solid rgba(124,255,178,.4);
+      border-radius: 999px;
+      padding: 6px 11px;
     }
 
     .section {
@@ -585,7 +614,9 @@
     .stack-card strong {
       display: block;
       margin-bottom: 7px;
-      color: var(--ink);
+      color: var(--green);
+      font-family: var(--mono);
+      font-size: .92rem;
     }
 
     .stack-card span {
@@ -646,7 +677,7 @@
 <body>
   <main class="wrap">
     <div class="topbar">
-      <div class="status"><span class="dot"></span><span>molly-young / revops-as-engineering</span></div>
+      <div class="status"><span class="dot"></span><span>molly-young / whoami</span></div>
       <div>RevOps as Engineering · GTM Operating Systems · AI-enabled workflows</div>
     </div>
 
@@ -663,6 +694,7 @@
             <p class="sublead">
               This is not a tools map. It is a map of the environments I have operated in, the layers I have built, and the leverage created across barely-out-of-stealth, early GTM, scale-up, hypergrowth, and IPO-stage companies.
             </p>
+            <a class="cta" href="molly-young-v1.0.0.pdf">$ download resume &nbsp;&rarr;</a>
           </div>
 
           <div class="triad">
@@ -711,7 +743,8 @@ pipeline:
 
           <div class="mini-bio">
             <strong>Molly Young</strong>
-            <span>Revenue Operations & GTM Engineering Leader · Saint Paul, MN</span>
+            <span>Revenue Operations &amp; GTM Engineering Leader · Saint Paul, MN</span>
+            <a href="molly-young-v1.0.0.pdf">$ download resume</a>
           </div>
         </aside>
       </div>
@@ -814,26 +847,46 @@ pipeline:
       <div class="section-head">
         <div>
           <h2>Selected stack</h2>
-          <p>Listed once, globally. The company panels stay focused on the operating story instead of inaccurate or repetitive per-company tool rows.</p>
+          <p>Organized like a system: the build layer up top, the GTM platforms it runs underneath.</p>
         </div>
       </div>
 
       <div class="stack-grid">
         <div class="stack-card">
-          <strong>CRM, MAP, and engagement</strong>
-          <span>Salesforce, HubSpot, Marketo, Eloqua, Outreach, Gong, Clari</span>
+          <strong>ai</strong>
+          <span>Claude, Claude Code, ChatGPT, Gemini, MCP servers, prompt engineering</span>
         </div>
         <div class="stack-card">
-          <strong>Routing, QTC, and revenue systems</strong>
-          <span>LeanData, Chili Piper, DealHub, PandaDoc, Workato, NetSuite</span>
+          <strong>runtime</strong>
+          <span>Python, Bash, SQL, SOQL, HTML, CSS, YAML, JSON, Markdown, Git, Flow, cron</span>
         </div>
         <div class="stack-card">
-          <strong>Signals, enrichment, and GTM data</strong>
-          <span>ZoomInfo, Floqer, Warmly, Propensity, 6sense, Common Room, Apollo</span>
+          <strong>pipelines</strong>
+          <span>Workato, Make, n8n, Zapier, REST APIs, webhooks, Salesforce CLI, HubSpot CLI, Metadata API, Bulk API</span>
         </div>
         <div class="stack-card">
-          <strong>Technical and analytics</strong>
-          <span>Python, Bash, SQL, SOQL, YAML, JSON, REST APIs, Salesforce CLI, Claude Code, Tableau, Looker</span>
+          <strong>infra</strong>
+          <span>Salesforce, HubSpot, NetSuite, DealHub, PandaDoc</span>
+        </div>
+        <div class="stack-card">
+          <strong>data</strong>
+          <span>ZoomInfo, LinkedIn Sales Navigator, Fullenrich, Cognism, Lusha, 6sense, Common Room, Warmly, Propensity, Apollo, GovSpend, Pursuit</span>
+        </div>
+        <div class="stack-card">
+          <strong>orchestration</strong>
+          <span>LeanData, Chili Piper, BookIt, Floqer, Outreach, Orum, Marketo, Eloqua, HeyReach, Instantly, Sendoso, Intercom, Qualified</span>
+        </div>
+        <div class="stack-card">
+          <strong>observability</strong>
+          <span>Gong, Avoma, Clari, Tableau, Looker</span>
+        </div>
+        <div class="stack-card">
+          <strong>partner</strong>
+          <span>Crossbeam, Tackle, Magentrix</span>
+        </div>
+        <div class="stack-card">
+          <strong>collab</strong>
+          <span>Slack, Jira, Linear, Confluence, Notion</span>
         </div>
       </div>
     </section>
