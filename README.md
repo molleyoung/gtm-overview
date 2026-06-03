@@ -2,7 +2,7 @@
 
 I build the GTM operating systems revenue teams run on.
 
-**Live site:** https://molleyoung.github.io/whoami/
+**Live site:** https://molleyoung.github.io/whoami/ 
 **Résumé (PDF):** https://molleyoung.github.io/whoami/molly-young-v1.0.0.pdf
 
 Early ops hire, again and again. I join before the playbook exists and build
