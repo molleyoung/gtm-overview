@@ -9,7 +9,7 @@ Early ops hire, again and again: I join before the playbook exists and build the
 
 ## Why this repo exists
 
-I build GTM systems for a living, so my resume is one. The interactive version is served from this repo via GitHub Pages.
+I build GTM systems for a living, so my resume is a live system of record for my work history. The interactive version is spun from this repo via GitHub Pages.
 
 ## What's inside
 
